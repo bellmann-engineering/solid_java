@@ -3,6 +3,11 @@ class Apartment {
     protected int squareFootage;
     protected int numberOfBedrooms;
 
+    public Apartment(String apartmentName, int numberOfBedrooms) {
+        this.apartmentName = apartmentName;
+        this.numberOfBedrooms = numberOfBedrooms;
+    }
+
     public void setSquareFootage(int sqft) {
         squareFootage = sqft;
     }
@@ -14,37 +19,37 @@ class Apartment {
     public int getNumberOfBedrooms() {
         return numberOfBedrooms;
     }
+
+    public void upgrade() {
+        squareFootage += 40;
+        numberOfBedrooms += getAdditionalBedrooms();
+    }
+
+    protected int getAdditionalBedrooms() {
+        return 0; // Default behavior for the base class
+    }
 }
 
 class PenthouseSuite extends Apartment {
     public PenthouseSuite() {
-        apartmentName = "Penthouse";
-        numberOfBedrooms = 4;
+        super("Penthouse", 4);
     }
 
-    public void setName() {
-        apartmentName = "Penthouse";
+    @Override
+    protected int getAdditionalBedrooms() {
+        return 1; // Penthouse has an additional bedroom
     }
 }
 
 class Studio extends Apartment {
     public Studio() {
-        apartmentName = "Studio";
-        numberOfBedrooms = 0;
-    }
-
-    public void setName() {
-        apartmentName = "Studio";
+        super("Studio", 0);
     }
 }
 
 class UnitUpgrader {
     public void upgrade(Apartment apartment) {
-        apartment.squareFootage += 40;
-
-        if (!apartment.getApartmentName().equals("Studio")) {
-            apartment.numberOfBedrooms += 1;
-        }
+        apartment.upgrade();
     }
 }
 
@@ -60,7 +65,7 @@ public class Main {
         upgrader.upgrade(penthouse);
         upgrader.upgrade(studio);
 
-        System.out.println("Penthouse: " + penthouse.getApartmentName() + ", Bedrooms: " + penthouse.getNumberOfBedrooms());
-        System.out.println("Studio: " + studio.getApartmentName() + ", Bedrooms: " + studio.getNumberOfBedrooms());
+        System.out.println("Penthouse: " + penthouse.getApartmentName() + ", Bedrooms: " + penthouse.getNumberOfBedrooms() + ", Square Footage: " + penthouse.squareFootage);
+        System.out.println("Studio: " + studio.getApartmentName() + ", Bedrooms: " + studio.getNumberOfBedrooms() + ", Square Footage: " + studio.squareFootage);
     }
 }
