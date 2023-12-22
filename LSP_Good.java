@@ -1,47 +1,37 @@
-class Apartment {
-    protected String apartmentName;
-    protected int squareFootage;
-    protected int numberOfBedrooms;
+public class PenthouseSuite {
+    public int squareFootage;
+    public int numberOfBedrooms;
+
+    public PenthouseSuite() {
+        numberOfBedrooms = 4;
+    }
 
     public void setSquareFootage(int sqft) {
         squareFootage = sqft;
     }
-
-    public String getApartmentName() {
-        return apartmentName;
-    }
-
-    public int getNumberOfBedrooms() {
-        return numberOfBedrooms;
-    }
-
-    // Methods for any common functionality between subclasses can be added here.
 }
 
-class PenthouseSuite extends Apartment {
-    public PenthouseSuite() {
-        apartmentName = "Penthouse";
-        numberOfBedrooms = 4;
-    }
+public class Studio {
+    public int squareFootage;
+    public int numberOfBedrooms;
 
-    // PenthouseSuite-specific methods can be added here.
-}
-
-class Studio extends Apartment {
     public Studio() {
-        apartmentName = "Studio";
         numberOfBedrooms = 0;
     }
 
-    // Studio-specific methods can be added here.
+    public void setSquareFootage(int sqft) {
+        squareFootage = sqft;
+    }
+}
+
+public class BedroomAdder {
+    public void addBedroom(PenthouseSuite penthouse) {
+        penthouse.numberOfBedrooms += 1;
+    }
 }
 
 public class Main {
     public static void main(String[] args) {
-        Apartment penthouse = new PenthouseSuite();
-        penthouse.setSquareFootage(2000);
-
-        Apartment studio = new Studio();
-        studio.setSquareFootage(500);
+        // Your main code here
     }
 }
